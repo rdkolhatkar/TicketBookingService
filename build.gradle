@@ -10,6 +10,8 @@ buildscript {
 		gatlingVersion = '3.9.2'
 		scalaLibraryVersion = '2.13.12'
 		lombokVersion = '1.18.30'
+        wireMockVersion = '3.10.0'
+        wireMockStandaloneVersion = '3.0.1'
 	}
 
 	dependencies {
@@ -105,16 +107,22 @@ dependencies {
 
 	// Junit and Component testing dependencies
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // wiremock
+    testImplementation "org.wiremock:wiremock:${wireMockVersion}"
 
-	// Serenity and BDD dependencies
+
+    // Serenity and BDD dependencies
 	bddImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
 	bddImplementation "net.serenity-bdd:serenity-reports:${serenityCoreVersion}"
-//		bddImplementation "net.serenity-bdd:serenity-cucumber: ${serenityCucumberVersion}"
+    //bddImplementation "net.serenity-bdd:serenity-cucumber: ${serenityCucumberVersion}"
 	bddImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
 	bddImplementation "io.cucumber:cucumber-junit:${cucumberJunitVersion}"
 	bddImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
+    bddImplementation "org.wiremock:wiremock:${wireMockVersion}"
+    bddImplementation "com.github.tomakehurst:wiremock-standalone:${wireMockStandaloneVersion}"
 
-	// Gatling and scala dependencies
+
+    // Gatling and scala dependencies
 	gatling "io.gatling:gatling-core:${gatlingVersion}"
 	gatling "io.gatling.highcharts:gatling-charts-highcharts:${gatlingVersion}"
 	gatling "org.scala-lang:scala-library:${scalaLibraryVersion}"
