@@ -6,6 +6,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "TicketBookingServiceUserRegistration")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userID;
+
+    @NotNull
+    private String userName;
 
     @NotNull(message = "Name cannot be null!")
     @NotBlank(message = "Name cannot be blank!")
