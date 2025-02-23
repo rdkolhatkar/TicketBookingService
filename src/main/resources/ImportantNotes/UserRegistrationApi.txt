@@ -1,0 +1,20 @@
+HTTP Request : POST
+APP_BASE_URL : http://localhost:8090/user/register
+Request Body :
+                {
+                    "firstName": "Jhon",
+                    "lastName": "Smith",
+                    "email": "abcd@gmail.com",
+                    "mobile": "9604822549",
+                    "password": "jhonsmith@1234"
+                }
+Response Code : 201 CREATED
+Response Body :
+                {
+                    "userID": 1,
+                    "firstName": "Jhon",
+                    "lastName": "Smith",
+                    "mobile": "9604822549",
+                    "email": "abcd@gmail.com",
+                    "password": "jhonsmith@1234"
+                }
