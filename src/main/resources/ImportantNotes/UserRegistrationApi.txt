@@ -6,6 +6,7 @@ Request Body :
                     "lastName": "Smith",
                     "email": "abcd@gmail.com",
                     "mobile": "9604822549",
+                    "userName": "U1Jhon@4",
                     "password": "jhonsmith@1234"
                 }
 Response Code : 201 CREATED
