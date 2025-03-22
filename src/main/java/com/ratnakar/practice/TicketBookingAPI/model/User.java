@@ -6,6 +6,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.ArrayList;
@@ -18,11 +19,12 @@ import java.util.List;
 @Table(name = "TicketBookingServiceUserRegistration")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer userID;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private String userID;
 
     @NotNull
-    private String userName;
+    String userName;
 
     @NotNull(message = "Name cannot be null!")
     @NotBlank(message = "Name cannot be blank!")

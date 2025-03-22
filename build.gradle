@@ -104,6 +104,7 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation "org.projectlombok:lombok:${lombokVersion}"
+	implementation "com.github.tomakehurst:wiremock-standalone:${wireMockStandaloneVersion}"
 
 	// Junit and Component testing dependencies
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

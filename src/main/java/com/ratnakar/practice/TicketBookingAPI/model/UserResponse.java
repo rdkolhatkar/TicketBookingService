@@ -1,13 +1,9 @@
 package com.ratnakar.practice.TicketBookingAPI.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 public class UserResponse {
 
     private String msg;
-    private Integer userID;
+    private String userID;
     private String firstName;
     private String lastName;
     private String userName;
@@ -36,11 +32,11 @@ public class UserResponse {
         this.lastName = lastName;
     }
 
-    public Integer getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

@@ -6,7 +6,7 @@ import com.ratnakar.practice.TicketBookingAPI.service.UserService;
 import com.ratnakar.practice.TicketBookingAPI.setup.UserResponseSetUp;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +21,6 @@ public class UserController {
     UserResponseSetUp userResponseSetUp;
     @PostMapping("/user/register")
     public ResponseEntity registerUser(@Valid @RequestBody User user) throws UserException {
-        return userResponseSetUp.userRegistrationResponse();
+        return userResponseSetUp.userRegistrationResponse(user);
     }
 }

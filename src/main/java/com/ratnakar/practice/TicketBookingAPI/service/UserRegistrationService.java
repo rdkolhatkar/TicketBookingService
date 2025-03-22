@@ -4,7 +4,7 @@ import com.ratnakar.practice.TicketBookingAPI.exception.UserException;
 import com.ratnakar.practice.TicketBookingAPI.model.User;
 import com.ratnakar.practice.TicketBookingAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
