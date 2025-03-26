@@ -52,6 +52,12 @@ sourceSets {
 		resources.srcDir 'src/gatling/resources'
 		compileClasspath += configurations.gatling
 	}
+	wiremock {
+		java.srcDir 'src/wiremock/java'
+		resources.srcDir 'src/wiremock/resources'
+		compileClasspath += main.output
+		runtimeClasspath += main.output
+	}
 }
 /*
 configurations.all{

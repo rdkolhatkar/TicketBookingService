@@ -16,20 +16,5 @@ public class TicketBookingApiApplication {
 		SpringApplication.run(TicketBookingApiApplication.class, args);
 	}
 
-	// Start WireMock Server when the application starts
-	CommandLineRunner startWireMockServer() {
-		return args -> {
-			// Configure WireMock to use files under src/mock
-			WireMockConfiguration config = WireMockConfiguration.wireMockConfig()
-					.port(8091)
-					.usingFilesUnderDirectory("src/mock");
-
-			WireMockServer wireMockServer = new WireMockServer(config);
-			wireMockServer.start();
-
-			System.out.println("WireMock server started on port 8091 using src/mock as the file directory");
-		};
-	}
-
 }
 
