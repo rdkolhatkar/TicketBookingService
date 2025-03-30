@@ -16,6 +16,7 @@ buildscript {
 
 	dependencies {
 		classpath "net.serenity-bdd:serenity-gradle-plugin:${serenityCoreVersion}"
+		classpath "com.github.tomakehurst:wiremock-standalone:${wireMockStandaloneVersion}"
 	}
 	/*
 	configurations.all{
@@ -38,6 +39,7 @@ plugins {
 }
 
 apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: 'scala'
 
 
 sourceSets {
@@ -74,6 +76,7 @@ configurations {
 	bddImplementation.canBeResolved = true
 	bddImplementation.extendsFrom testImplementation
 	bddRuntime.extendsFrom testRuntime
+	wiremockImplementation.extendsFrom implementation
 }
 group = 'com.ratnakar.practice'
 version = '0.0.1-SNAPSHOT'
@@ -110,6 +113,8 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation "org.projectlombok:lombok:${lombokVersion}"
+	// Scala
+	implementation "org.scala-lang:scala-library:${scalaLibraryVersion}"
 	// Wiremock-standalone
 	implementation "org.wiremock:wiremock-standalone:${wireMockStandaloneVersion}"
 
@@ -164,6 +169,12 @@ task perfTest(type: JavaExec) {
 			'-rf',
 			"reports"
 	]
+}
+
+tasks.register('runWireMock', JavaExec) {
+	description = 'Runs the WireMock standalone server'
+	classpath = sourceSets.wiremock.runtimeClasspath
+	mainClass = 'com.ratnakar.wiremock.runner' // Ensure this is your correct package path
 }
 
 jar{
