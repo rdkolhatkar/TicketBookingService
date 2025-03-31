@@ -1,11 +1,12 @@
 {
+  "priority": 1,
   "request": {
-    "method": "GET",
-    "url": "/test/mockResponse"
+    "method": "POST",
+    "url": "/user/register"
   },
   "response": {
     "status": 200,
-    "bodyFileName": "response.json",
+    "bodyFileName": "TicketBookingResponse_200.json",
     "headers": {
       "Content-Type": "application/json"
     }

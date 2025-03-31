@@ -1,0 +1,19 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "url": "/user/register",
+    "bodyPatterns": [
+      {
+        "contains": "TicketBooking-500"
+      }
+    ]
+  },
+  "response": {
+    "status": 400,
+    "bodyFileName": "TicketBookingResponse_500.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

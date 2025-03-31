@@ -1,0 +1,6 @@
+{
+  "error": "Bad Request",
+  "errorCode": 400,
+  "errorText": "Invalid Input",
+  "path": "/user/register"
+}
