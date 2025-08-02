@@ -23,6 +23,7 @@ public class UserResponseSetUp {
 
     public ResponseEntity<UserResponse> userRegistrationResponse(User user) {
         UserResponse userResponse = new UserResponse(); // create new instance each time
+        User savedUser = userRepository.save(user);
         String uniqueName = user.getUserName();
         String uniqueId = user.getUserID();
         String uniqueFirstName = user.getFirstName();
@@ -31,6 +32,7 @@ public class UserResponseSetUp {
             userRepository.save(user);
             userResponse.setMsg("New User Added Successfully");
             userResponse.setUserName(uniqueName);
+            savedUser.getUserID();
             userResponse.setUserID(uniqueId);
             userResponse.setFirstName(uniqueFirstName);
             userResponse.setLastName(uniqueLastName);

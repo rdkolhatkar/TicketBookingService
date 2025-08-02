@@ -1,4 +1,4 @@
-Below are the Database Queries for creating the "ticketbookingapi" Schema & table "ticketbookingserviceuserregistration"
+Below are the SQL Database Queries for creating the "ticketbookingapi" Schema & table "ticketbookingserviceuserregistration"
 ---------------------------------------------------------------------------------------------------------------------------------
 use ticketbookingapi;
 create table TicketBookingServiceUserRegistration(user_id varchar(255) not null, user_name varchar(255) not null,
@@ -14,5 +14,9 @@ ALTER TABLE ticketbookingserviceuserregistration
 MODIFY COLUMN user_id BIGINT NOT NULL AUTO_INCREMENT;
 --------------------------------------------------------------------------------------------------------------------------------
 delete from ticketbookingserviceuserregistration where user_id = 1;
+delete from ticketbookingserviceuserregistration where user_name = 'U1Jhon@4';
+--------------------------------------------------------------------------------------------------------------------------------
 
 DROP TABLE TicketBookingServiceUserRegistration;
+
+ALTER TABLE ticketbookingserviceuserregistration DROP COLUMN userid;
