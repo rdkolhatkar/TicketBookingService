@@ -2,7 +2,7 @@
   "priority": 1,
   "request": {
     "method": "POST",
-    "url": "/user/register"
+    "url": "/api/users/register"
   },
   "response": {
     "status": 200,

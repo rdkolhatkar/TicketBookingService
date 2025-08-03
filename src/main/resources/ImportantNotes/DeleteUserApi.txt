@@ -1,0 +1,11 @@
+HTTP Request : POST
+APP_BASE_URL : http://localhost:8091/api/users/delete/7c36e6b4-a547-4f30-8dfc-7c066203f4ce
+Request Body :
+                {
+
+                }
+Response Code : 200 OK
+Response Body :
+                {
+                    User with ID 7c36e6b4-a547-4f30-8dfc-7c066203f4ce deleted successfully
+                }

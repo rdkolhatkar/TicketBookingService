@@ -1,0 +1,19 @@
+HTTP Request : POST
+APP_BASE_URL : http://localhost:8091/api/users/76464b5a-9f85-4b68-be88-5d9b235e3742
+Request Body :
+                {
+
+                }
+Response Code : 200 OK
+Response Body :
+                [
+                    {
+                        "userID": "76464b5a-9f85-4b68-be88-5d9b235e3742",
+                        "userName": "U1Jhon@4",
+                        "firstName": "Jhon",
+                        "lastName": "Smith",
+                        "mobile": "9604822549",
+                        "email": "abcd@gmail.com",
+                        "password": "jhonsmith@1234"
+                    }
+                ]

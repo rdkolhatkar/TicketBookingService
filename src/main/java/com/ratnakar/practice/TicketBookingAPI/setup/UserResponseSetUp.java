@@ -29,7 +29,6 @@ public class UserResponseSetUp {
         String uniqueFirstName = user.getFirstName();
         String uniqueLastName = user.getLastName();
         if (!userRegistrationService.checkUserAlreadyExists(uniqueName)) {
-            userRepository.save(user);
             userResponse.setMsg("New User Added Successfully");
             userResponse.setUserName(uniqueName);
             savedUser.getUserID();

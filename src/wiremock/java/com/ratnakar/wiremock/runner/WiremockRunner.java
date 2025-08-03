@@ -7,7 +7,7 @@ public class WiremockRunner {
     public static void main(String[] args) {
         // Define the WireMock configuration
         WireMockConfiguration config = new WireMockConfiguration()
-                .port(8091) // Ensure this matches your intended port
+                .port(8092) // Ensure this matches your intended port
                 .usingFilesUnderDirectory("src/wiremock/resources/static-mocks"); // Updated path
 
         // Start the WireMock server
