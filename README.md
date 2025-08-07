@@ -1,79 +1,106 @@
-# TicketBookingAPI
+# Ticket Booking API
 
-## Overview
-
-The TicketBookingAPI project is a robust application developed using the Spring Boot framework, designed to facilitate ticket booking services. This project incorporates modern development practices and tools to ensure high performance, reliability, and effective testing.
+A Spring Boot application for ticket booking management with user registration and authentication.
 
 ## Technologies Used
 
-- **Framework**: Spring Boot
-- **Build Tool**: Gradle
-- **Programming Language**: Java
-- **BDD Automation**: Serenity with Cucumber
-- **Performance Testing**: Gatling
-  - **Gatling Scripts**: Written in Scala
-- **API Mocking**: WireMock
+- Java
+- Spring Boot
+- Gradle
+- RESTful APIs
+- Postman for API testing
 
-## Features
+## Prerequisites
 
-- **Ticket Booking Service**: A comprehensive system for managing and processing ticket bookings.
-- **Automated Testing**: BDD automation using Serenity and Cucumber for thorough and reliable test coverage.
-- **Performance Testing**: Utilizes Gatling for performance testing to ensure the application meets scalability and response time requirements.
-- **API Mocking**: WireMock is used to mock API calls for effective automated testing and isolation of test scenarios.
+- JDK 11 or later
+- Gradle
+- Your favorite IDE (IntelliJ IDEA recommended)
+- Postman for testing APIs
 
 ## Getting Started
 
-### Prerequisites
+### Building the Application
 
-- **Java**: Ensure Java Development Kit (JDK) 11 or higher is installed.
-- **Gradle**: Install Gradle to build the project.
-- **Scala**: Required for running Gatling performance tests.
+```bash
+./gradlew clean build
+```
 
-### Installation
+### Running the Application
 
-1. **Clone the Repository**:
-   ```bash
-   git clone <repository-url>
-   ```
+```bash  
+./gradlew bootRun
+```
 
-2. **Build the Project**:
-   Navigate to the project directory and run:
-   ```bash
-   ./gradlew build
-   ```
+### Testing the Application
 
-3. **Run the Application**:
-   Start the application using:
-   ```bash
-   ./gradlew bootRun
-   ```
+You can use Postman to test the API endpoints. Import the provided Postman collection file to get started.
+
+### API Endpoints
+
+- **User Registration**: `POST /api/users/register`
+- **User Deletion**: `DELETE /api/users/delete/{userId}`
+- **Mock Service**: `http://localhost:8092/api/mock`
+- 
+
+### Database
+
+The application uses an in-memory H2 database for development and testing. You can switch to a different database by
+modifying the `application.properties` file.
+
+### Configuration
+
+The application configuration is managed through the `application.properties` file. You can set your database connection
+details, server port, and other configurations here.
 
 ### Testing
 
-1. **Run Automated Tests**:
-   Execute BDD tests with:
-   ```bash
-   ./gradlew test
-   ```
+The application includes unit tests and integration tests. You can run the tests using the following command:
 
-2. **Run Performance Tests**:
-   Execute Gatling performance tests by running Scala scripts:
-   ```bash
-   ./gradlew gatlingRun
-   ```
+```bash
+./gradlew test
+```
 
-## Contributing
+The application will start on:
+User Service: http://localhost:8091
+Mock Service: http://localhost:8092
+API Documentation
+User Management APIs
 
-1. **Fork the Repository**: Create a personal copy by forking it on GitHub.
-2. **Create a Branch**: Develop features or fix issues in a new branch.
-3. **Submit a Pull Request**: After testing, submit a pull request for review.
+1. Register User
+    - **Endpoint**: `POST /api/users/register`
+    - **Request Body**:
+      ```json
+      {
+      "firstName": "Jhon",
+      "lastName": "Smith",
+      "email": "abcd@gmail.com",
+      "mobile": "9604822549",
+      "userName": "U1Jhon@4",
+      "password": "jhonsmith@1234"
+      }
+      ```
+    - **Response**:
+      ```json
+      {
+         "message": "User registered successfully"
+      }
+      ```
 
-## Contact
+2. Delete User
+   Endpoint: DELETE /api/users/delete/{userId}
+   Port: 8091
 
-For any questions or support, please reach out to the project maintainers at [sushilyadav0606@gmail.com].
+3. Testing
+   Postman Collection
+   A comprehensive Postman collection is included in the project at: TicketBookingApiPostmanCollection/TicketBookingAPI.postman_collection.json The collection includes test scenarios for:  
+   Successful user registration (200)
+   Bad request handling (400)
+   Server error handling (500)
 
-## License
+4. Running Tests
+   Import the Postman collection and execute the requests to test different scenarios.
 
-This project is licensed under the [MIT License](LICENSE).
-
-Feel free to explore and contribute to the TicketBookingAPI project to enhance its functionality and performance!
+5. Important Notes
+   Ensure both ports (8091 and 8092) are available before starting the application
+   The mock service runs on port 8092 for testing purposes
+   The main service runs on port 8091
