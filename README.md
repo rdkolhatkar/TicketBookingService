@@ -1,106 +1,137 @@
-# Ticket Booking API
+# 🎟️ Ticket Booking API
 
-A Spring Boot application for ticket booking management with user registration and authentication.
+A Spring Boot-based REST API for managing user registration and deletion in a ticket booking system.
 
-## Technologies Used
+This application supports full user lifecycle operations with validation, UUID-based user IDs, and database integration. It also includes a mock service (WireMock) to simulate external dependencies.
 
-- Java
+---
+
+## 🚀 Features
+
+- User registration with validation
+- Duplicate user prevention
+- Fetch all users / individual user
+- Delete user by ID
+- RESTful API design with proper status codes
+- WireMock support for mock services
+- MySQL database integration (configurable)
+- Postman collection for testing
+
+---
+
+## 🛠️ Tech Stack
+
+- Java 17
 - Spring Boot
 - Gradle
-- RESTful APIs
-- Postman for API testing
+- MySQL / H2 (configurable)
+- REST APIs
+- WireMock (Standalone Server)
+- JUnit 5
+- Postman
 
-## Prerequisites
+---
 
-- JDK 11 or later
+## 📦 Project Structure
+
+src/
+├── main/
+│ ├── java/com/ratnakar/practice/TicketBookingAPI/
+│ │ ├── controller/
+│ │ ├── service/
+│ │ ├── model/
+│ │ ├── repository/
+│ │ ├── exception/
+│ │ └── setup/
+│ └── resources/
+│ └── application.properties
+└── test/
+    ├── java/com/ratnakar/practice/TicketBookingAPI/
+    │ ├── controller/
+    │ ├── service/
+    │ └── setup/
+    └── resources/
+└── application-test.properties
+
+---
+
+## 🧰 Prerequisites
+
+- Java 17+
 - Gradle
-- Your favorite IDE (IntelliJ IDEA recommended)
-- Postman for testing APIs
+- MySQL (optional, if not using H2)
+- Postman
 
-## Getting Started
+---
 
-### Building the Application
+## ⚙️ Configuration
 
-```bash
+Update `src/main/resources/application.properties` to point to your desired DB:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/ticketbookingapi
+spring.datasource.username=root
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+server.port=8091
+
+```
+## 🏗️ Build & Run
 ./gradlew clean build
-```
-
-### Running the Application
-
-```bash  
 ./gradlew bootRun
-```
 
-### Testing the Application
+📬 API Endpoints
+👤 User Management
+### User Management Endpoints
+| Method   | Endpoint                 | Description              |
+| -------- | ------------------------ | ------------------------ |
+| `POST`   | `/api/users/register`    | Register a new user      |
+| `GET`    | `/api/users`             | Get all registered users |
+| `GET`    | `/api/users/{id}`        | Get user by ID           |
+| `DELETE` | `/api/users/delete/{id}` | Delete user by ID        |
 
-You can use Postman to test the API endpoints. Import the provided Postman collection file to get started.
+📦 Mock Service (WireMock)
+| Port   | Example Endpoint                 |
+| ------ | -------------------------------- |
+| `8092` | `http://localhost:8092/api/mock` |
 
-### API Endpoints
+📮 Sample Request: Register User
+POST /api/users/register
+Sample Request:
+                  {
+                  "firstName": "John",
+                  "lastName": "Smith",
+                  "email": "john.smith@example.com",
+                  "mobile": "9876543210",
+                  "userName": "johnsmith123",
+                  "password": "john@1234"
+                  }
+Sample Response:
+                  {
+                  "msg": "New User Added Successfully",
+                  "userID": "generated-uuid",
+                  "firstName": "John",
+                  "lastName": "Smith",
+                  "userName": "johnsmith123"
+                  }
 
-- **User Registration**: `POST /api/users/register`
-- **User Deletion**: `DELETE /api/users/delete/{userId}`
-- **Mock Service**: `http://localhost:8092/api/mock`
-- 
+🧪 Testing the APIs
+✅ Postman Collection
+Located at: TicketBookingApiPostmanCollection/TicketBookingAPI.postman_collection.json
 
-### Database
+📝 Notes
+Ensure ports 8091 (main app) and 8092 (mock service) are free.
 
-The application uses an in-memory H2 database for development and testing. You can switch to a different database by
-modifying the `application.properties` file.
+Use MySQL or switch to H2 by uncommenting relevant lines in application.properties.
 
-### Configuration
+UUID is used for primary key user_id.
 
-The application configuration is managed through the `application.properties` file. You can set your database connection
-details, server port, and other configurations here.
+📌 Future Enhancements
+1) JWT-based authentication
+2) Booking service integration
+3) Swagger/OpenAPI documentation
+4) Docker containerization
 
-### Testing
-
-The application includes unit tests and integration tests. You can run the tests using the following command:
-
-```bash
-./gradlew test
-```
-
-The application will start on:
-User Service: http://localhost:8091
-Mock Service: http://localhost:8092
-API Documentation
-User Management APIs
-
-1. Register User
-    - **Endpoint**: `POST /api/users/register`
-    - **Request Body**:
-      ```json
-      {
-      "firstName": "Jhon",
-      "lastName": "Smith",
-      "email": "abcd@gmail.com",
-      "mobile": "9604822549",
-      "userName": "U1Jhon@4",
-      "password": "jhonsmith@1234"
-      }
-      ```
-    - **Response**:
-      ```json
-      {
-         "message": "User registered successfully"
-      }
-      ```
-
-2. Delete User
-   Endpoint: DELETE /api/users/delete/{userId}
-   Port: 8091
-
-3. Testing
-   Postman Collection
-   A comprehensive Postman collection is included in the project at: TicketBookingApiPostmanCollection/TicketBookingAPI.postman_collection.json The collection includes test scenarios for:  
-   Successful user registration (200)
-   Bad request handling (400)
-   Server error handling (500)
-
-4. Running Tests
-   Import the Postman collection and execute the requests to test different scenarios.
-
-5. Important Notes
-   Ensure both ports (8091 and 8092) are available before starting the application
-   The mock service runs on port 8092 for testing purposes
-   The main service runs on port 8091
+👨‍💻 Author
+Ratnakar Kolhatkar
+🔗 GitHub
