@@ -34,24 +34,27 @@ This application supports full user lifecycle operations with validation, UUID-b
 
 ## 📦 Project Structure
 
-src/
-├── main/
-│ ├── java/com/ratnakar/practice/TicketBookingAPI/
-│ │ ├── controller/
-│ │ ├── service/
-│ │ ├── model/
-│ │ ├── repository/
-│ │ ├── exception/
-│ │ └── setup/
-│ └── resources/
-│ └── application.properties
-└── test/
-    ├── java/com/ratnakar/practice/TicketBookingAPI/
-    │ ├── controller/
-    │ ├── service/
-    │ └── setup/
-    └── resources/
-└── application-test.properties
+```
+📁 src/
+┣ 📂 main/
+┃ ┣ 📂 java/com/ratnakar/practice/TicketBookingAPI/
+┃ ┃ ┣ 🎮 controller/ # REST controllers (API endpoints)
+┃ ┃ ┣ ⚙️ service/ # Business logic layer
+┃ ┃ ┣ 🧩 model/ # Entities and DTOs
+┃ ┃ ┣ 🗃️ repository/ # JPA repositories for DB access
+┃ ┃ ┣ 🚨 exception/ # Custom exceptions & global handlers
+┃ ┃ ┗ 🏁 setup/ # App setup, configuration & response handling
+┃ ┗ 📂 resources/
+┃ ┗ 📝 application.properties # Main application configuration
+┣ 📂 test/
+┃ ┣ 📂 java/com/ratnakar/practice/TicketBookingAPI/
+┃ ┃ ┣ 🧪 controller/ # Controller test cases (JUnit + Mockito)
+┃ ┃ ┣ 🧠 service/ # Service layer test cases
+┃ ┃ ┗ 🧰 setup/ # Test setup & mocks
+┃ ┗ 📂 resources/
+┃ ┗ 🧾 application-test.properties # Test environment config
+
+```
 
 ---
 
