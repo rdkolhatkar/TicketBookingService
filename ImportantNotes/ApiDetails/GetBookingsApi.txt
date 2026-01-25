@@ -1,0 +1,21 @@
+HTTP Request : GET
+APP_BASE_URL : http://localhost:8092/api/bookings/all
+Request Body : None
+Response Code : 200 OK
+Response Body :
+                [
+                    {
+                        "bookingId": 1,
+                        "userId": "1",
+                        "bookedByName": "Jhon Smith",
+                        "movieName": "Naruto: Shippuden",
+                        "numberOfTickets": 8
+                    },
+                    {
+                        "bookingId": 2,
+                        "userId": "2",
+                        "bookedByName": "Alice Johnson",
+                        "movieName": "One Piece: Red",
+                        "numberOfTickets": 3
+                    }
+                ]

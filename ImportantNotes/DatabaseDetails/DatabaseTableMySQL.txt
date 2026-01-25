@@ -1,0 +1,55 @@
+-- ------------------------------------------------------------------------
+-- Create database schema if it does not exist
+-- ------------------------------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS ticketbookingapi;
+USE ticketbookingapi;
+
+-- ------------------------------------------------------------------------
+-- Create user registration table
+-- ------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS registration (
+    user_id BIGINT NOT NULL AUTO_INCREMENT,
+    user_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    mobile VARCHAR(10) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (user_id),
+    UNIQUE (user_name)
+);
+
+-- View all users
+SELECT * FROM registration;
+
+-- ------------------------------------------------------------------------
+-- Example deletes (optional, for testing)
+-- ------------------------------------------------------------------------
+DELETE FROM registration WHERE user_id = 1;
+DELETE FROM registration WHERE user_name = 'U1Jhon@4';
+
+-- ------------------------------------------------------------------------
+-- Drop user registration table (optional)
+-- ------------------------------------------------------------------------
+DROP TABLE IF EXISTS registration;
+
+-- ------------------------------------------------------------------------
+-- Drop a column (example)
+-- ------------------------------------------------------------------------
+ALTER TABLE registration DROP COLUMN user_id;
+
+-- ------------------------------------------------------------------------
+-- Create bookings table
+-- ------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS bookings (
+    booking_id BIGINT NOT NULL AUTO_INCREMENT,
+    user_id VARCHAR(255) NOT NULL,
+    booked_by_name VARCHAR(255) NOT NULL,
+    movie_name VARCHAR(255) NOT NULL,
+    number_of_tickets INT NOT NULL,
+    PRIMARY KEY (booking_id)
+);
+
+-- View all bookings
+SELECT * FROM bookings;
+-----------------------------------------------------------------------------------------

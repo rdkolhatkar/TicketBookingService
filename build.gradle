@@ -12,22 +12,15 @@ buildscript {
 		lombokVersion = '1.18.30'
         wireMockVersion = '3.10.0'
         wireMockStandaloneVersion = '3.0.1'
+		mySqlVersion = '8.1.0'
+		postgreSqlVersion = '42.6.0'
+		zaxxerHikariCP = '5.0.1'
 	}
 
 	dependencies {
 		classpath "net.serenity-bdd:serenity-gradle-plugin:${serenityCoreVersion}"
 		classpath "com.github.tomakehurst:wiremock-standalone:${wireMockStandaloneVersion}"
 	}
-	/*
-	configurations.all{
-		resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-			if (details.requested.group == 'org.springframework' && details.requested.name.startsWith('spring-')) {
-				details.useVersion "${springBeansVersion}"
-				details.because 'Nexus IQ fix'
-			}
-		}
-	}
-	*/
 }
 
 plugins {
@@ -41,19 +34,7 @@ plugins {
 apply plugin: 'net.serenity-bdd.aggregator'
 apply plugin: 'scala'
 
-
 sourceSets {
-	bdd {
-		java.srcDir 'src/bdd/java'
-		resources.srcDir 'src/bdd/resources'
-		compileClasspath += main.output
-		runtimeClasspath += main.output
-	}
-	gatling {
-		scala.srcDir 'src/gatling/scala'
-		resources.srcDir 'src/gatling/resources'
-		compileClasspath += configurations.gatling
-	}
 	wiremock {
 		java.srcDir 'src/wiremock/java'
 		resources.srcDir 'src/wiremock/resources'
@@ -61,23 +42,12 @@ sourceSets {
 		runtimeClasspath += main.output
 	}
 }
-/*
-configurations.all{
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        if (details.requested.group == 'org.springframework' && details.requested.name.startsWith('spring-')) {
-            details.useVersion "${springBeansVersion}"
-            details.because 'Nexus IQ fix'
-        }
-    }
-}
-*/
 
 configurations {
-	bddImplementation.canBeResolved = true
-	bddImplementation.extendsFrom testImplementation
-	bddRuntime.extendsFrom testRuntime
 	wiremockImplementation.extendsFrom implementation
+	testImplementation.extendsFrom implementation
 }
+
 group = 'com.ratnakar.practice'
 version = '0.0.1-SNAPSHOT'
 
@@ -95,51 +65,35 @@ repositories {
 	mavenCentral()
 }
 
-configurations {
-	all{
-		exclude group: 'org.codehaus.groovy', module: 'groovy'
-	}
-}
-
 dependencies {
-
 	// Spring Boot Dependencies
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+	implementation "org.springframework.boot:spring-boot-starter-validation"
+	implementation "org.springframework.boot:spring-boot-starter-web"
+	implementation "org.springframework.boot:spring-boot-starter-jdbc"
+	// spring-boot-starter-data-rest is used to automatically expose Spring Data repositories as RESTful APIs (CRUD endpoints) without writing controllers.
+	implementation "org.springframework.boot:spring-boot-starter-data-rest"
+	implementation "org.apache.commons:commons-dbcp2"
+	implementation "jakarta.annotation:jakarta.annotation-api"
+	// Optional: HikariCP (Spring Boot uses it by default)
+	implementation "com.zaxxer:HikariCP:${zaxxerHikariCP}"
 
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.mysql:mysql-connector-j:8.3.0'
-	compileOnly 'org.projectlombok:lombok'
+	// Database MySQL & PostgreSQL drivers
+	runtimeOnly "com.mysql:mysql-connector-j:${mySqlVersion}" // MYSQL
+	runtimeOnly "org.postgresql:postgresql:${postgreSqlVersion}"  // POSTGRESQL
+
+	compileOnly "org.projectlombok:lombok"
 	// runtimeOnly 'com.h2database:h2'
-	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor "org.projectlombok:lombok"
 	implementation "org.projectlombok:lombok:${lombokVersion}"
-	// Scala
-	implementation "org.scala-lang:scala-library:${scalaLibraryVersion}"
 	// Wiremock-standalone
 	implementation "org.wiremock:wiremock-standalone:${wireMockStandaloneVersion}"
-
 	// Junit and Component testing dependencies
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
     // wiremock
     testImplementation "org.wiremock:wiremock:${wireMockVersion}"
-
-
-    // Serenity and BDD dependencies
-	bddImplementation "net.serenity-bdd:serenity-core:${serenityCoreVersion}"
-	bddImplementation "net.serenity-bdd:serenity-reports:${serenityCoreVersion}"
-    //bddImplementation "net.serenity-bdd:serenity-cucumber: ${serenityCucumberVersion}"
-	bddImplementation "io.cucumber:cucumber-java:${cucumberVersion}"
-	bddImplementation "io.cucumber:cucumber-junit:${cucumberJunitVersion}"
-	bddImplementation "io.rest-assured:rest-assured:${restAssuredVersion}"
-    bddImplementation "org.wiremock:wiremock:${wireMockVersion}"
-    bddImplementation "com.github.tomakehurst:wiremock-standalone:${wireMockStandaloneVersion}"
-
-
-    // Gatling and scala dependencies
-	gatling "io.gatling:gatling-core:${gatlingVersion}"
-	gatling "io.gatling.highcharts:gatling-charts-highcharts:${gatlingVersion}"
-	gatling "org.scala-lang:scala-library:${scalaLibraryVersion}"
-
+	testCompileOnly "org.projectlombok:lombok"
+	testAnnotationProcessor "org.projectlombok:lombok"
 }
 
 configurations{
@@ -147,28 +101,6 @@ configurations{
 		it.outgoing.artifacts.removeIf { it.buildDependencies.getDependencies(null).contains(jar)}
 		it.outgoing.artifact(bootJar)
 	}
-}
-
-task bddTest(type: Test) {
-	finalizedBy('aggregate')
-	group = 'verification'
-	testClassesDirs = sourceSets.bdd.output.classesDirs
-	classpath = sourceSets.bdd.runtimeClasspath
-	systemProperties System.properties
-	include "**/Runner.class"
-}
-
-task perfTest(type: JavaExec) {
-	classpath = sourceSets.gatling.runtimeClasspath
-	systemProperties System.properties
-	classpath = sourceSets.gatling.runtimeClasspath + configurations.gatling
-	main  = "io.gatling.app.Gatling"
-	args = [
-			'-s',
-			'com.ratnakar.practice.simuation.TicketBooking',
-			'-rf',
-			"reports"
-	]
 }
 
 tasks.register('runWireMock', JavaExec) {

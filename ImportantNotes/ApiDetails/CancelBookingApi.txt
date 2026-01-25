@@ -1,0 +1,6 @@
+HTTP Request : DELETE
+APP_BASE_URL : http://localhost:8092/api/bookings/cancel/1
+Request Body : None
+Response Code : 200 OK
+Response Body :
+                "Booking with ID 1 has been cancelled."

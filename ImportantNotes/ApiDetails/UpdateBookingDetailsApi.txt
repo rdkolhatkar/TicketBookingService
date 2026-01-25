@@ -1,0 +1,15 @@
+HTTP Request : PUT
+APP_BASE_URL : http://localhost:8092/api/bookings/update/1
+Request Body :
+                {
+                    "newNumberOfTickets": 8
+                }
+Response Code : 200 OK
+Response Body :
+                {
+                    "bookingId": 1,
+                    "userId": "1",
+                    "bookedByName": "Jhon Smith",
+                    "movieName": "Naruto: Shippuden",
+                    "numberOfTickets": 8
+                }
