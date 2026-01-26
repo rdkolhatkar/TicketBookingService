@@ -18,8 +18,7 @@ public class User {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "user_id", nullable = false, columnDefinition = "CHAR(36)")
-    private String userID;
-
+    private String userId;
 
     @NotNull
     @Column(name = "user_name")
@@ -51,11 +50,11 @@ public class User {
 
 
     public String getUserID() {
-        return userID;
+        return userId;
     }
 
     public void setUserID(String userID) {
-        this.userID = userID;
+        this.userId = userID;
     }
 
     public String getUserName() {

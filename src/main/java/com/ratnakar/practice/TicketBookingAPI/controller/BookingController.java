@@ -1,6 +1,9 @@
 package com.ratnakar.practice.TicketBookingAPI.controller;
 
 import com.ratnakar.practice.TicketBookingAPI.model.Booking;
+import com.ratnakar.practice.TicketBookingAPI.model.BookingData;
+import com.ratnakar.practice.TicketBookingAPI.model.BookingRequest;
+import com.ratnakar.practice.TicketBookingAPI.model.UpdateBookingRequest;
 import com.ratnakar.practice.TicketBookingAPI.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +20,13 @@ public class BookingController {
 
     // Book a ticket
     @PostMapping("/book")
-    public ResponseEntity<Booking> bookTicket(
-            @RequestParam String userId,
-            @RequestParam String bookedByName,
-            @RequestParam String movieName,
-            @RequestParam int numberOfTickets
-    ) throws Exception {
-        Booking booking = bookingService.bookTicket(userId, bookedByName, movieName, numberOfTickets);
+    public ResponseEntity<Booking> bookTicket(@RequestBody BookingRequest request) throws Exception {
+        Booking booking = bookingService.bookTicket(
+                request.getUserId(),
+                request.getBookedByName(),
+                request.getMovieName(),
+                request.getNumberOfTickets()
+        );
         return ResponseEntity.ok(booking);
     }
 
@@ -31,10 +34,14 @@ public class BookingController {
     @PutMapping("/update/{bookingId}")
     public ResponseEntity<Booking> updateBooking(
             @PathVariable Long bookingId,
-            @RequestParam int newNumberOfTickets
-    ) throws Exception {
-        Booking updatedBooking = bookingService.updateBooking(bookingId, newNumberOfTickets);
-        return ResponseEntity.ok(updatedBooking);
+            @RequestBody UpdateBookingRequest request) throws Exception {
+
+        return ResponseEntity.ok(
+                bookingService.updateBooking(
+                        bookingId,
+                        request.getNewNumberOfTickets()
+                )
+        );
     }
 
     // Cancel booking
@@ -46,8 +53,8 @@ public class BookingController {
 
     // Get all bookings
     @GetMapping("/all")
-    public ResponseEntity<List<Booking>> getAllBookings() {
-        List<Booking> bookings = bookingService.getAllBookings();
+    public ResponseEntity<List<BookingData>> getAllBookings() {
+        List<BookingData> bookings = bookingService.getAllBookings();
         return ResponseEntity.ok(bookings);
     }
 }

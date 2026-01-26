@@ -1,13 +1,14 @@
 -- ------------------------------------------------------------------------
--- Create PostgreSQL schema
+-- Create PostgreSQL schema in Public database
 -- ------------------------------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS ticketbookingapi;
-
+-- Set the schema for your session
+SET search_path TO ticketbookingapi;
 -- ------------------------------------------------------------------------
 -- Create registration table
 -- ------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS registration (
-    user_id BIGSERIAL PRIMARY KEY,
+CREATE TABLE ticketbookingapi.registration (
+    user_id CHAR(36) PRIMARY KEY,   -- UUID string
     user_name VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
@@ -32,3 +33,10 @@ CREATE TABLE IF NOT EXISTS bookings (
 
 -- View all bookings
 SELECT * FROM bookings;
+-- Make user_id FOREIGN KEY
+ALTER TABLE bookings
+ADD CONSTRAINT fk_user
+FOREIGN KEY (user_id) REFERENCES registration(user_id);
+
+-- Delete Table
+DROP TABLE IF EXISTS ticketbookingapi.registration;

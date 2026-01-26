@@ -1,6 +1,7 @@
 package com.ratnakar.practice.TicketBookingAPI.service;
 
 import com.ratnakar.practice.TicketBookingAPI.model.Booking;
+import com.ratnakar.practice.TicketBookingAPI.model.BookingData;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ public interface BookingService {
 
     void cancelBooking(Long bookingId) throws Exception;
 
-    List<Booking> getAllBookings();
+    List<BookingData> getAllBookings();
+
+
 }
 

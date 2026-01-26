@@ -53,3 +53,11 @@ CREATE TABLE IF NOT EXISTS bookings (
 -- View all bookings
 SELECT * FROM bookings;
 -----------------------------------------------------------------------------------------
+-- View all bookings
+ALTER TABLE bookings
+ADD CONSTRAINT fk_user
+FOREIGN KEY (user_id) REFERENCES registration(user_id);
+
+TRUNCATE TABLE bookings;
+
+ALTER TABLE bookings AUTO_INCREMENT = 1;
