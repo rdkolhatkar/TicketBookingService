@@ -56,6 +56,17 @@ java {
 }
 
 configurations {
+	// Make testImplementation inherit from implementation
+	testImplementation.extendsFrom implementation
+	// Inherit compileOnly dependencies (e.g., Lombok)
+	testImplementation.extendsFrom compileOnly
+	// Inherit runtime dependencies (DB drivers, etc.)
+	testImplementation.extendsFrom runtimeOnly
+	// Inherit annotation processors if required
+	testAnnotationProcessor.extendsFrom annotationProcessor
+}
+
+configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
