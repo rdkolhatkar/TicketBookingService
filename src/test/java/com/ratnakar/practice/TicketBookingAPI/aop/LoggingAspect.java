@@ -1,8 +1,7 @@
 package com.ratnakar.practice.TicketBookingAPI.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -77,6 +76,7 @@ public class LoggingAspect {
         // This log statement executes BEFORE the target service method
         LOGGER.info("Method is called");
     }
+
     /**
      * ============================
      * JOINPOINT IN SPRING AOP
@@ -163,6 +163,123 @@ public class LoggingAspect {
 
         // Logs the name of the intercepted method
         LOGGER.info("Method is called " + joinPoint.getSignature().getName());
+    }
+
+    /**
+     * ============================
+     * @After ADVICE
+     * ============================
+     *
+     * @After advice runs AFTER the target method execution
+     * REGARDLESS of the outcome.
+     *
+     * --------------------------------
+     * WHEN DOES @After EXECUTE?
+     * --------------------------------
+     * - If the method executes successfully
+     * - If the method throws an exception
+     *
+     * In short:
+     * @After = finally block in try-catch-finally
+     *
+     * --------------------------------
+     * USE CASES
+     * --------------------------------
+     * - Logging method completion
+     * - Cleaning up resources
+     * - Closing connections
+     *
+     * --------------------------------
+     * IMPORTANT POINT
+     * --------------------------------
+     * @After does NOT know:
+     * - Whether the method succeeded or failed
+     *
+     * For success → use @AfterReturning
+     * For failure → use @AfterThrowing
+     */
+    @After(
+            "execution(* com.ratnakar.practice.TicketBookingAPI.service.UserRegistrationService*(..))"
+    )
+    public void logMethodExecuted(JoinPoint joinPoint) {
+
+        // Logs the name of the method AFTER execution (success or failure)
+        LOGGER.info("Method is Executed " + joinPoint.getSignature().getName());
+    }
+
+    /**
+     * ============================
+     * @AfterThrowing ADVICE
+     * ============================
+     *
+     * @AfterThrowing advice runs ONLY IF
+     * the target method throws an exception.
+     *
+     * --------------------------------
+     * WHEN DOES IT EXECUTE?
+     * --------------------------------
+     * - Method starts execution
+     * - Exception occurs
+     * - @AfterThrowing is triggered
+     *
+     * --------------------------------
+     * USE CASES
+     * --------------------------------
+     * - Error logging
+     * - Auditing failed operations
+     * - Sending alerts / notifications
+     *
+     * --------------------------------
+     * IMPORTANT POINT
+     * --------------------------------
+     * - This advice will NOT run
+     *   if the method executes successfully.
+     */
+    @AfterThrowing(
+            "execution(* com.ratnakar.practice.TicketBookingAPI.service.UserRegistrationService*(..))"
+    )
+    public void logMethodCrashed(JoinPoint joinPoint) {
+
+        // Logs the name of the method that crashed due to exception
+        LOGGER.info("Method is Executed " + joinPoint.getSignature().getName());
+    }
+
+    /**
+     * ============================
+     * @AfterReturning ADVICE
+     * ============================
+     *
+     * @AfterReturning advice runs ONLY
+     * when the target method completes
+     * SUCCESSFULLY (no exception).
+     *
+     * --------------------------------
+     * WHEN DOES IT EXECUTE?
+     * --------------------------------
+     * - Method starts execution
+     * - Method finishes normally
+     * - @AfterReturning is triggered
+     *
+     * --------------------------------
+     * USE CASES
+     * --------------------------------
+     * - Logging successful execution
+     * - Auditing success operations
+     * - Post-processing results
+     *
+     * --------------------------------
+     * IMPORTANT POINT
+     * --------------------------------
+     * - This advice will NOT run
+     *   if an exception occurs.
+     */
+    @AfterReturning(
+            "execution(* com.ratnakar.practice.TicketBookingAPI.service.UserRegistrationService*(..))"
+    )
+    public void logMethodCallSuccessful(JoinPoint joinPoint) {
+
+        // Logs the name of the successfully executed method
+        LOGGER.info("Method is Executed " + joinPoint.getSignature().getName());
     }
 
 }
