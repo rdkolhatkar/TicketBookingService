@@ -44,8 +44,7 @@ import org.springframework.context.annotation.ComponentScan;
  * This eliminates the need to deploy WAR files to an external server - the application is self-contained.
  */
 @SpringBootApplication
-@ComponentScan(basePackages = "com.ratnakar.practice.TicketBookingAPI")
-public class TicketBookingApiApplication {
+public class TicketBookingApplication {
 
 	/**
 	 * Main method - Entry point of the application.
@@ -72,7 +71,7 @@ public class TicketBookingApiApplication {
 		// Parameters:
 		// 1. TicketBookingApiApplication.class: The primary Spring component (configuration class)
 		// 2. args: Command-line arguments
-		SpringApplication.run(TicketBookingApiApplication.class, args);
+		SpringApplication.run(TicketBookingApplication.class, args);
 
 		// After this line, the application is running and listening for HTTP requests (if it's a web app)
 		// The main thread will wait indefinitely until the application is shut down

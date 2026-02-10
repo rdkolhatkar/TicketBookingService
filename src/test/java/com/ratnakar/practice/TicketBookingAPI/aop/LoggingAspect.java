@@ -68,9 +68,7 @@ public class LoggingAspect {
      * - In any class whose name starts with UserServiceImpl
      * - Inside the specified package
      */
-    @Before(
-            "execution(* com.ratnakar.practice.TicketBookingAPI.service.UserServiceImpl*(..))"
-    )
+    @Before("com.ratnakar.practice.TicketBookingAPI.aop.CommonPointcuts.serviceLayer()")
     public void logMethodCall() {
 
         // This log statement executes BEFORE the target service method
@@ -156,9 +154,7 @@ public class LoggingAspect {
      * Method is called validateUser
      *
      */
-    @Before(
-            "execution(* com.ratnakar.practice.TicketBookingAPI.service.UserRegistrationService*(..))"
-    )
+    @Before("com.ratnakar.practice.TicketBookingAPI.aop.CommonPointcuts.serviceLayer()")
     public void logMethodCall(JoinPoint joinPoint) {
 
         // Logs the name of the intercepted method
@@ -172,35 +168,8 @@ public class LoggingAspect {
      *
      * @After advice runs AFTER the target method execution
      * REGARDLESS of the outcome.
-     *
-     * --------------------------------
-     * WHEN DOES @After EXECUTE?
-     * --------------------------------
-     * - If the method executes successfully
-     * - If the method throws an exception
-     *
-     * In short:
-     * @After = finally block in try-catch-finally
-     *
-     * --------------------------------
-     * USE CASES
-     * --------------------------------
-     * - Logging method completion
-     * - Cleaning up resources
-     * - Closing connections
-     *
-     * --------------------------------
-     * IMPORTANT POINT
-     * --------------------------------
-     * @After does NOT know:
-     * - Whether the method succeeded or failed
-     *
-     * For success → use @AfterReturning
-     * For failure → use @AfterThrowing
      */
-    @After(
-            "execution(* com.ratnakar.practice.TicketBookingAPI.service.UserRegistrationService*(..))"
-    )
+    @After("com.ratnakar.practice.TicketBookingAPI.aop.CommonPointcuts.serviceLayer()")
     public void logMethodExecuted(JoinPoint joinPoint) {
 
         // Logs the name of the method AFTER execution (success or failure)
@@ -211,33 +180,8 @@ public class LoggingAspect {
      * ============================
      * @AfterThrowing ADVICE
      * ============================
-     *
-     * @AfterThrowing advice runs ONLY IF
-     * the target method throws an exception.
-     *
-     * --------------------------------
-     * WHEN DOES IT EXECUTE?
-     * --------------------------------
-     * - Method starts execution
-     * - Exception occurs
-     * - @AfterThrowing is triggered
-     *
-     * --------------------------------
-     * USE CASES
-     * --------------------------------
-     * - Error logging
-     * - Auditing failed operations
-     * - Sending alerts / notifications
-     *
-     * --------------------------------
-     * IMPORTANT POINT
-     * --------------------------------
-     * - This advice will NOT run
-     *   if the method executes successfully.
      */
-    @AfterThrowing(
-            "execution(* com.ratnakar.practice.TicketBookingAPI.service.UserRegistrationService*(..))"
-    )
+    @AfterThrowing("com.ratnakar.practice.TicketBookingAPI.aop.CommonPointcuts.serviceLayer()")
     public void logMethodCrashed(JoinPoint joinPoint) {
 
         // Logs the name of the method that crashed due to exception
@@ -248,38 +192,11 @@ public class LoggingAspect {
      * ============================
      * @AfterReturning ADVICE
      * ============================
-     *
-     * @AfterReturning advice runs ONLY
-     * when the target method completes
-     * SUCCESSFULLY (no exception).
-     *
-     * --------------------------------
-     * WHEN DOES IT EXECUTE?
-     * --------------------------------
-     * - Method starts execution
-     * - Method finishes normally
-     * - @AfterReturning is triggered
-     *
-     * --------------------------------
-     * USE CASES
-     * --------------------------------
-     * - Logging successful execution
-     * - Auditing success operations
-     * - Post-processing results
-     *
-     * --------------------------------
-     * IMPORTANT POINT
-     * --------------------------------
-     * - This advice will NOT run
-     *   if an exception occurs.
      */
-    @AfterReturning(
-            "execution(* com.ratnakar.practice.TicketBookingAPI.service.UserRegistrationService*(..))"
-    )
+    @AfterReturning("com.ratnakar.practice.TicketBookingAPI.aop.CommonPointcuts.serviceLayer()")
     public void logMethodCallSuccessful(JoinPoint joinPoint) {
 
         // Logs the name of the successfully executed method
         LOGGER.info("Method is Executed " + joinPoint.getSignature().getName());
     }
-
 }
