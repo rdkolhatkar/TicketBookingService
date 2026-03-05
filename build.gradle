@@ -88,7 +88,7 @@ dependencies {
 	implementation "jakarta.annotation:jakarta.annotation-api"
 	// Optional: HikariCP (Spring Boot uses it by default)
 	implementation "com.zaxxer:HikariCP:${zaxxerHikariCP}"
-
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	// Database MySQL & PostgreSQL drivers
 	runtimeOnly "com.mysql:mysql-connector-j:${mySqlVersion}" // MYSQL
 	runtimeOnly "org.postgresql:postgresql:${postgreSqlVersion}"  // POSTGRESQL

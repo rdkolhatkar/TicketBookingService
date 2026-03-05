@@ -356,6 +356,45 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "HealthCheck",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8091/actuator/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8091",
+          "path": [
+            "actuator",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Actuator",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8091/actuator",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8091",
+          "path": [
+            "actuator"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
